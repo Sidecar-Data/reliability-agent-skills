@@ -1,0 +1,11 @@
+# Ingest entry point for service-platform's INGEST_AGENT_SKILLS task
+# (RELIABILITY_AGENT_SKILLS_PROFILE, default "reliability").
+#
+# The three planned bundles are commented out until they land under skills/ —
+# an uncommented slug with no bundle directory fails the whole ingest.
+profiles:
+  reliability:
+    skills: []
+    # - slug: authoring-data-quality-tests
+    # - slug: investigating-data-incidents
+    # - slug: responding-to-data-incidents
