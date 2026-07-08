@@ -5,13 +5,13 @@ quality (33 of the 120 workflows in `data_team_workflows.csv`, including Data Qu
 Response nearly wholesale). Like its sibling [`builder-agent-skills`](https://github.com/Sidecar-Data/builder-agent-skills),
 this is a deliberately small initial set: **3 skills chosen for bang-for-buck, not exhaustive coverage.**
 
-## The portfolio (planned — bundles land next)
+## The portfolio
 
 | Skill | One-liner | Workflows covered (IDs) |
 |---|---|---|
-| `investigating-data-incidents` | Symptom → lineage walk → root cause → origin classification (source vs ETL vs transform vs model) | 32, 33, 34, 35, 36, 37, 45, 109 |
-| `responding-to-data-incidents` | Remediate with the smallest safe change: backfill, rerun, revert, quarantine — plus incident comms, postmortems, runbooks | 4, 5, 7, 10, 24, 38–42, 46, 104, 116 |
-| `authoring-data-quality-tests` | Schema tests, freshness SLAs, monitor thresholds, and alert-noise tuning | 28, 29, 31, 43, 44 |
+| [`investigating-data-incidents`](skills/investigating-data-incidents/SKILL.md) | Symptom → lineage walk → root cause → origin classification (source vs ETL vs transform vs model) | 32, 33, 34, 35, 36, 37, 45, 109 |
+| [`responding-to-data-incidents`](skills/responding-to-data-incidents/SKILL.md) | Remediate with the smallest safe change: backfill, rerun, revert, quarantine — plus incident comms, postmortems, runbooks | 4, 5, 7, 10, 24, 38–42, 46, 104, 116 |
+| [`authoring-data-quality-tests`](skills/authoring-data-quality-tests/SKILL.md) | Schema tests, freshness SLAs, monitor thresholds, and alert-noise tuning | 28, 29, 31, 43, 44 |
 
 The three compose into one arc: *detect and diagnose → restore correctness → prevent recurrence.*
 Diagnosis (`investigating-data-incidents`) always precedes remediation; remediation that reveals a
