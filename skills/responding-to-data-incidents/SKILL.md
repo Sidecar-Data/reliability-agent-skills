@@ -26,6 +26,8 @@ metadata:
 - From **Sidecar platform context**: blast radius (downstream models, exposures, consumers and their usage); job topology (which scheduled runs will touch the affected assets next — your containment deadline); how the pipeline handles reruns today (incremental strategies, unique keys, watermarks, snapshot schedules).
 - From **the human**: tolerance for gaps vs wrongness (is missing data acceptable while we fix, or must stale-but-plausible data stay up?); who must approve consumer-facing actions; where incident comms go.
 
+Ask only what changes the remediation choice; state assumptions for the rest and proceed. When the human is unreachable, execute the reversible steps your stated assumptions cover and report — approval-gated actions (consumer-facing rollback, truncation, history rewrites) wait for a human, full stop; everything else must not stall on an unanswered question.
+
 ## Workflow
 
 1. **Contain first.** Before engineering the cure: pause the job that would propagate the badness on its next run; quarantine consumer-facing wrong data (roll back to the last good build, restrict the affected mart, or annotate the dashboard); notify affected consumers with what's known (drafted and distributed via `communicating-data-operations`). A one-hour-old incident with clean containment beats a perfectly fixed one that spread for six.

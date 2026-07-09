@@ -36,6 +36,8 @@ From **the human**:
 - Who responds when this test goes red? (No plausible responder → the test should be `warn` or shouldn't exist)
 - Which SLAs are commitments to consumers vs aspirations? ("Finance needs it by 8am" vs "daily-ish")
 
+Ask only what changes the test plan; state assumptions for the rest and proceed. Unknown responder → default the test to `warn` and flag the ownership gap in the PR description rather than blocking on the question.
+
 ## Workflow
 
 1. **Map coverage against importance.** Cross the coverage map with usage: heavily-consumed bare models are the priority; sandbox projects and fixtures are explicitly out of scope. Deliverable: a ranked gap list with a one-line business-impact justification each — not "N models lack tests."

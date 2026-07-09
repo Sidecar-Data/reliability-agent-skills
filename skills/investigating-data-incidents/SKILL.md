@@ -36,6 +36,8 @@ From **the human** (ask only what changes the investigation):
 - What should the number be, and on what authority? ("Finance says revenue is $2.1M" beats "it looks low")
 - When did it last look right, and how tolerant are consumers of the current badness? (drives containment urgency, not diagnosis)
 
+Ask at most the questions whose answers change the investigation. State assumptions for everything else and proceed — an unanswered question is never the reason a run ends without a diagnosis; deliver the diagnosis with the assumption stated.
+
 ## Workflow
 
 1. **Pin the symptom precisely.** One sentence: which asset, which column/metric, expected vs observed, first-seen time. If you cannot reproduce the symptom with a query, stop — you may be chasing a stale alert or a caching artifact in the BI layer.

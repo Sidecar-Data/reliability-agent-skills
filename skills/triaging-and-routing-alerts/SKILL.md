@@ -31,7 +31,7 @@ From **Sidecar platform context**:
 | Who owns this? | Ownership metadata, model/source `meta` owner tags, CODEOWNERS on the model path, the team that merged the last change |
 | Is this expected? | Known fixtures, in-progress backfills, announced maintenance windows |
 
-From **the human / the org**: the escalation ladder (who is on call, who is the fallback), and where incidents are tracked (Slack channel, Jira/Linear project) — learn once, reuse.
+From **the human / the org**: the escalation ladder (who is on call, who is the fallback), and where incidents are tracked (Slack channel, Jira/Linear project) — learn once, reuse. Unknown ladder or tracker → still produce the disposition with the routing target left as a named gap ("route to owner of X — owner metadata missing, flagging") rather than stalling; the disposition decision never waits on org plumbing.
 
 ## Workflow
 

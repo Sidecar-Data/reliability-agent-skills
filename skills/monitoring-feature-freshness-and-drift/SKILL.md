@@ -35,6 +35,8 @@ From **the human / ML team** (this context lives outside the warehouse — ask):
 - What window was the model trained on? (the training window is the drift baseline, not "last month")
 - Who owns model retraining, and what drift magnitude would trigger it? (the threshold is a retraining decision, not a statistics decision)
 
+Ask only what changes the monitoring design; state assumptions for the rest and proceed. No ML-team answer available → ship the coarse pipeline-health tier (freshness, null rate, volume) now with importance-ranked drift monitors proposed as a follow-up, assumptions stated — never a run that ends with only questions.
+
 ## Workflow
 
 1. **Inventory and rank.** Feature tables from catalog + lineage; features ranked by model importance (from the ML team) and consumption criticality. The monitor budget goes to the head of that list.
