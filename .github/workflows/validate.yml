@@ -1,0 +1,50 @@
+name: Validate skill bundles
+
+on: [push, pull_request]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pyyaml
+      # Mirrors service-platform's skill_bundle.py parse (frontmatter = split on ---,
+      # yaml.safe_load) plus the manifest contract: every profile slug has a bundle
+      # whose frontmatter name matches its directory.
+      - run: |
+          python - <<'EOF'
+          import sys, yaml, pathlib
+
+          errors = []
+          manifest = yaml.safe_load(pathlib.Path("skills-manifest.yaml").read_text())
+          slugs = [s["slug"] for s in manifest["profiles"]["reliability"]["skills"]]
+
+          for slug in slugs:
+              bundle = pathlib.Path("skills") / slug / "SKILL.md"
+              if not bundle.exists():
+                  errors.append(f"{slug}: manifest lists it but {bundle} is missing")
+                  continue
+              parts = bundle.read_text().split("---")
+              if len(parts) < 3:
+                  errors.append(f"{bundle}: no frontmatter block")
+                  continue
+              try:
+                  meta = yaml.safe_load(parts[1]) or {}
+              except yaml.YAMLError as exc:
+                  errors.append(f"{bundle}: frontmatter is not valid YAML — {str(exc).splitlines()[0]}")
+                  continue
+              if meta.get("name") != slug:
+                  errors.append(f"{bundle}: frontmatter name {meta.get('name')!r} != directory {slug!r}")
+
+          for bundle in pathlib.Path("skills").glob("*/SKILL.md"):
+              if bundle.parent.name not in slugs:
+                  errors.append(f"{bundle}: bundle exists but is not in the manifest")
+
+          if errors:
+              print("\n".join(errors))
+              sys.exit(1)
+          print(f"OK: {len(slugs)} bundles validate")
+          EOF
