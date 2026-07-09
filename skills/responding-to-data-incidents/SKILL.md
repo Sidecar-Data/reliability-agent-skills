@@ -18,7 +18,7 @@ metadata:
 - Duplicate or late-arriving data needs idempotent repair
 - An active incident needs ownership: status comms, a postmortem, a runbook
 
-**Do NOT use for:** finding the root cause (route to `investigating-data-incidents` first — this skill *starts* from a diagnosis); writing the preventive tests afterward (`authoring-data-quality-tests`); the refactor or feature the incident revealed you "should really do" (file it for Builder). If the fix requires an upstream producer to change their schema or timing, coordinating that change is Custodian's.
+**Do NOT use for:** finding the root cause (route to `investigating-data-incidents` first — this skill *starts* from a diagnosis); the tool-level mechanics of a rerun, resync, or backfill in a specific tool (`recovering-data-pipelines` — this skill decides *that* we rerun; that one knows *how*, per tool); drafting and distributing the stakeholder messages (`communicating-data-operations` — this skill supplies the facts and triggers it at contain, update, and all-clear); writing the preventive tests afterward (`authoring-data-quality-tests`); the refactor or feature the incident revealed you "should really do" (file it for Builder). If the fix requires an upstream producer to change their schema or timing, coordinating that change is Custodian's.
 
 ## Step 0 — Gather context before changing anything
 
@@ -28,9 +28,9 @@ metadata:
 
 ## Workflow
 
-1. **Contain first.** Before engineering the cure: pause the job that would propagate the badness on its next run; quarantine consumer-facing wrong data (roll back to the last good build, restrict the affected mart, or annotate the dashboard); notify affected consumers with what's known. A one-hour-old incident with clean containment beats a perfectly fixed one that spread for six.
+1. **Contain first.** Before engineering the cure: pause the job that would propagate the badness on its next run; quarantine consumer-facing wrong data (roll back to the last good build, restrict the affected mart, or annotate the dashboard); notify affected consumers with what's known (drafted and distributed via `communicating-data-operations`). A one-hour-old incident with clean containment beats a perfectly fixed one that spread for six.
 2. **Choose the smallest remediation that fits the origin class**, in escalating order of invasiveness:
-   - **Rerun** — for transient failures (deadlock, timeout, OOM, flaky source). Precondition: the operation is idempotent, or you've made it so.
+   - **Rerun** — for transient failures (deadlock, timeout, OOM, flaky source). Precondition: the operation is idempotent, or you've made it so. Tool mechanics (which verb, in which tool, reading cursors first): `recovering-data-pipelines` and its per-tool playbooks — same for backfills below.
    - **Config/infra fix** — retries, timeouts, credentials, incremental-field or sync-mode corrections. No code semantics change.
    - **Revert** — for a bad deploy: revert the merged change and rebuild. Choose revert over fix-forward whenever the fix isn't both obvious and small — reverting is the known-good state.
    - **Minimal code fix** — the smallest diff that restores correct behavior. Not a refactor, not a cleanup, not "while I'm here."

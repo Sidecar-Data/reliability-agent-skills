@@ -4,5 +4,9 @@ profiles:
   reliability:
     skills:
       - slug: authoring-data-quality-tests
+      - slug: communicating-data-operations
       - slug: investigating-data-incidents
+      - slug: monitoring-feature-freshness-and-drift
+      - slug: recovering-data-pipelines
       - slug: responding-to-data-incidents
+      - slug: triaging-and-routing-alerts

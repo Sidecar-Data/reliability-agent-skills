@@ -18,7 +18,7 @@ metadata:
 - Audit monitor/test health: no owner, chronically red, config drift
 - Recalibrate noisy alerts that the team has learned to ignore
 
-**Do NOT use for:** encoding a business rule as a singular test while building the model — tests written alongside new models belong to Builder's flow; diagnosing a currently-firing test (`investigating-data-incidents`); enforced model contracts with schema guarantees (Custodian). If tuning reveals the *data* is wrong rather than the threshold, stop tuning — that's an incident, route to `investigating-data-incidents`.
+**Do NOT use for:** encoding a business rule as a singular test while building the model — tests written alongside new models belong to Builder's flow; diagnosing a currently-firing test (`investigating-data-incidents`); the in-the-moment decision to suppress or route a firing alert (`triaging-and-routing-alerts` — triage suppresses once with a rationale; this skill is where a *repeatedly* suppressed alert comes for permanent recalibration); enforced model contracts with schema guarantees (Custodian). If tuning reveals the *data* is wrong rather than the threshold, stop tuning — that's an incident, route to `investigating-data-incidents`.
 
 ## Step 0 — Gather context before writing any test
 

@@ -18,7 +18,7 @@ metadata:
 - Warehouse data disagrees with the system of record (reconciliation)
 - An open incident needs a root cause and an origin classification
 
-**Do NOT use for:** executing the remediation — backfill, rerun, revert, quarantine (hand the diagnosis to `responding-to-data-incidents`); adding tests to prevent recurrence (`authoring-data-quality-tests`); anything that starts as a design request rather than a symptom (Builder). If diagnosis reveals an upstream producer changed a schema deliberately, the negotiation belongs to Custodian — deliver the finding and route.
+**Do NOT use for:** the intake decision itself — dedupe, severity, routing, whether to open an incident (`triaging-and-routing-alerts` runs first and hands qualified alerts here); executing the remediation — backfill, rerun, revert, quarantine (hand the diagnosis to `responding-to-data-incidents`); adding tests to prevent recurrence (`authoring-data-quality-tests`); anything that starts as a design request rather than a symptom (Builder). If diagnosis reveals an upstream producer changed a schema deliberately, the negotiation belongs to Custodian — deliver the finding and route.
 
 ## Step 0 — Gather context before forming any hypothesis
 
